@@ -1,0 +1,17 @@
+create table emp(empname string, skill string, dept int, sal int, location string)row format delimited fields terminated by ',';
+
+Load Data local inpath '/home/acadgild/Downloads/emp_details.txt' overwrite into table emp;
+
+Task 1:
+Get a list of employees who receive a salary less than 100, compared to their immediate employee with higher salary in the same unit
+
+Create view max_sal as select location, max(sal) as maxsal from emp group by location;
+
+Select * from max_sal;
+
+Task 2:
+List of all employees who draw higher salary than the average salary of that department
+
+Select a.empname,a.sal,b.maxsal from emp a, max_sal b where a.location = b.location and a.sal+100<b.maxsal;
+
+
